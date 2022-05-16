@@ -94,3 +94,43 @@ and they are going to be useful for makeing "safe" values that don't change
 i just declared a constant and now I can't set the type ? okay i guess since it doesn't change
 you use UPPERCASE to declare constants
 it's always static so you use self to call it
+
+### exercise correction
+
+I was missing the part where I need to put self:: to call a function
+also, I want to put all the constants outside the class inside the class
+now i corrected everything in the exercise. What changed ?
+i set the self:: component in the assignment part of the declaration
+the right part of the equal
+and then i change every call to the constansts in the functions declaration to self::CONSTANTNAME
+
+also, in the code lower, in the function code, insteade of calling an instance
+we use the class call with Encounter::functionname
+also, in the function call whose parameter is a constant, well the
+argument must have the class call attached to it, just not the constant name
+
+## common method for every object
+
+**construct and **descruct are method that come from php and can be used implicitely by all the classes
+construct is used to build the instance and is called automatically when you use the new
+destruct is used at the end of the script
+what happens if we use \_\_construct in place of the name of method ?
+so maybe this is not connected but we're not sure so let's explain
+we merge the 2 methods into one and instead of giving it a name we just say \_\_construct(param1, param2)
+also we don't declare a return value (we specified void in the 2 methods)
+we don't call the methods in the 2nd example
+instead when the instance is created, we just pass the 2 values as arguments of the instance
+and then it calls the \_\_construct automatically
+is it really useful ? i'm not sure but it sure shows that the method construct is indeed called
+
+IMPORTANT ! if you use the \_\_construct you can directly skip the variable assignment,
+as long as you have the parameters set, php 8 (not before) will do it automatically
+however, for this to work, you indeed neet to build the function with the proper parameters
+
+here in the video the guy does something very interesting :
+he puts two objects inside a single variable, separated by a comma
+no wait he is not doing that, let's look again
+there are 2 classes, pont and tablier
+then in the instanciation, he makes the pont and then the tablier inside the pont
+oooh but that wouldn't work inside my own file because you need to build the classes using construct
+i'll do another file

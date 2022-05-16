@@ -1,124 +1,57 @@
 <?php
 
-declare(strict_types=1);
-
-const RESULT_WINNER = 1;
-const RESULT_LOSER = -1;
-const RESULT_DRAW = 0;
-const RESULT_POSSIBILITIES = [RESULT_WINNER, RESULT_LOSER, RESULT_DRAW];
 
 class Encounter
+
 {
-    private const BOOBS = 3;
-    private string $cat = "nina";
-    public static int $nmbrlick = 0;
+    private const POWER = 10;
+    private const LOWER_DIVIDE = 400;
+    public const RESULT_WINNER = 1;
+    public const RESULT_LOSER = -1;
+    public const RESULT_DRAW = 0;
+    public const RESULT_POSSIBILITIES = [self::RESULT_WINNER, self::RESULT_LOSER, self::RESULT_DRAW];
 
-    private function probability(int $player1, int $player2): float
+    public static function probabilityAgainst(Player $playerOne, Player $playerTwo): float
     {
-        return 1 / (1 + (10 ** (($player2 - $player1) / 400)));
+        return 1 / (1 + (self::POWER ** (($playerTwo->level - $playerOne->level) / self::LOWER_DIVIDE)));
     }
 
-    public function updatelevel(int &$player1, int $player2, int $result)
+    public static function setNewLevel(Player $playerOne, Player $playerTwo, int $playerOneResult): void
     {
-        if (!in_array($result, RESULT_POSSIBILITIES)) {
-            trigger_error(sprintf('Invalidresult. Expected %s', implode(' or ', RESULT_POSSIBILITIES)));
+        if (!in_array($playerOneResult, self::RESULT_POSSIBILITIES)) {
+            trigger_error(sprintf('Invalid result. Expected %s', implode(' or ', self::RESULT_POSSIBILITIES)));
         }
-        $player1 += (int) (32 * $result  - $this->probability($player1, $player2));
-        // echo $this->cat;
-    }
 
-    public function changeCat(string $cat)
-    {
-        $this->cat = $cat;
-    }
-
-    public function seeMyCat()
-    {
-        echo $this->cat;
-    }
-
-    public function getCat()
-    {
-        return $this->cat;
-    }
-
-    public function print($parameter)
-    {
-        return print_r($parameter);
-    }
-
-    public static function talktoShashou(string $levres): bool
-    {
-        if ($levres != "humides") {
-            trigger_error('ses levres doivent etre humides', E_USER_ERROR);
-        }
-        return true;
-    }
-
-    public function shashoukiss(string $levres)
-    {
-        if (self::talktoShashou($levres)) {
-            $this->changeCat($levres);
-        }
-    }
-
-    public function jeteleche()
-    {
-        self::$nmbrlick++;
-    }
-
-    public static function seemyboobs()
-    {
-        return self::BOOBS;
+        $playerOne->level += round(32 * ($playerOneResult - self::probabilityAgainst($playerOne, $playerTwo)));
     }
 }
 
-$alex = 777;
-$harshika = 999;
-$hotstuffbetweenus = new Encounter;
-$hotstuffbetweenus->jeteleche();
-// echo $cat;
-// echo $hotstuffbetweenus->cat;
-$hotstuffbetweenus->seeMyCat();
+class Player
+{
+    public int $level;
+}
 
-echo '<br>';
+$greg = new Player;
+$jade = new Player;
 
-$hotstuffbetweenus->changeCat("Horace");
-$hotstuffbetweenus->seeMyCat();
+$greg->level = 400;
+$jade->level = 800;
+$encounter = new Encounter;
 
-// echo sprintf(
-//     'alex a %.2f%% chance de gagner face a shashou',
-//     $hotstuffbetweenus->probability($alex, $harshika) * 100
-// );
+echo sprintf(
+    'Greg à %.2f%% chance de gagner face a Jade',
+    Encounter::probabilityAgainst($greg, $jade) * 100
+) . PHP_EOL;
 
-echo '<br>';
+// Imaginons que greg l'emporte tout de même.
+Encounter::setNewLevel($greg, $jade, Encounter::RESULT_WINNER);
+Encounter::setNewLevel($jade, $greg, Encounter::RESULT_LOSER);
 
-$hotstuffbetweenus->updatelevel($alex, $harshika, RESULT_LOSER);
-$hotstuffbetweenus->updatelevel($harshika, $alex, RESULT_WINNER);
+echo sprintf(
+    'les niveaux des joueurs ont évolués vers %s pour Greg et %s pour Jade',
+    $greg->level,
+    $jade->level
+);
 
-echo '<br>';
 
-// echo sprintf(
-//     'les niveaux des jjoueurs ont evolue vers %s pour Greg et %s pou jade',
-//     $alex,
-//     $harshika
-// );
-
-print_r(get_class_methods($hotstuffbetweenus));
-echo '<br>';
-
-$hotstuffbetweenus->print($hotstuffbetweenus->getCat());
-echo '<br>';
-var_dump(Encounter::talktoShashou("humides"));
-
-echo '<br>';
-
-var_dump($hotstuffbetweenus->shashoukiss("humides"));
-var_dump($hotstuffbetweenus->getCat());
-$gorseval = new Encounter;
-$gorseval->jeteleche();
-
-echo '<br>';
-echo Encounter::$nmbrlick;
-echo '<br>';
-echo Encounter::seemyboobs();
+exit(0);
