@@ -73,3 +73,24 @@ echo $hotstuffbetweenus->cat => fatal error
 it seems that we are just setting variables as private
 and then we build a method to specifically change them,
 kinda like a setter in react ?
+
+to use a static method, we reference the class then the method
+Class::methodname();
+
+so what we just did by adding a static method and a method that uses a static method is that
+we can now use that function that only interacts with the class and not the instance
+to actually greenlight a function that will indeed interact with the class
+
+you use self::methodname() that will be a good hint to know that it is a static method
+we added a function that increments a static variable
+then we can display the content of that variable, which doesn't depend on any of the instances
+
+that's so sweet
+
+### constants
+
+just like javascript, we can use constants: they're immutable values
+and they are going to be useful for makeing "safe" values that don't change
+i just declared a constant and now I can't set the type ? okay i guess since it doesn't change
+you use UPPERCASE to declare constants
+it's always static so you use self to call it

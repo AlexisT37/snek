@@ -9,7 +9,10 @@ const RESULT_POSSIBILITIES = [RESULT_WINNER, RESULT_LOSER, RESULT_DRAW];
 
 class Encounter
 {
+    private const BOOBS = 3;
     private string $cat = "nina";
+    public static int $nmbrlick = 0;
+
     private function probability(int $player1, int $player2): float
     {
         return 1 / (1 + (10 ** (($player2 - $player1) / 400)));
@@ -43,11 +46,37 @@ class Encounter
     {
         return print_r($parameter);
     }
+
+    public static function talktoShashou(string $levres): bool
+    {
+        if ($levres != "humides") {
+            trigger_error('ses levres doivent etre humides', E_USER_ERROR);
+        }
+        return true;
+    }
+
+    public function shashoukiss(string $levres)
+    {
+        if (self::talktoShashou($levres)) {
+            $this->changeCat($levres);
+        }
+    }
+
+    public function jeteleche()
+    {
+        self::$nmbrlick++;
+    }
+
+    public static function seemyboobs()
+    {
+        return self::BOOBS;
+    }
 }
 
 $alex = 777;
 $harshika = 999;
 $hotstuffbetweenus = new Encounter;
+$hotstuffbetweenus->jeteleche();
 // echo $cat;
 // echo $hotstuffbetweenus->cat;
 $hotstuffbetweenus->seeMyCat();
@@ -79,3 +108,17 @@ print_r(get_class_methods($hotstuffbetweenus));
 echo '<br>';
 
 $hotstuffbetweenus->print($hotstuffbetweenus->getCat());
+echo '<br>';
+var_dump(Encounter::talktoShashou("humides"));
+
+echo '<br>';
+
+var_dump($hotstuffbetweenus->shashoukiss("humides"));
+var_dump($hotstuffbetweenus->getCat());
+$gorseval = new Encounter;
+$gorseval->jeteleche();
+
+echo '<br>';
+echo Encounter::$nmbrlick;
+echo '<br>';
+echo Encounter::seemyboobs();
