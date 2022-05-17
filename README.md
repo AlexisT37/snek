@@ -134,3 +134,25 @@ there are 2 classes, pont and tablier
 then in the instanciation, he makes the pont and then the tablier inside the pont
 oooh but that wouldn't work inside my own file because you need to build the classes using construct
 i'll do another file
+
+### cloning: the clone method allows to copy every property present in an object to another object
+
+okay so it seems that we need to create a specific clone method in the declaration of our object
+because when there is a subobject then the clone for the main object will make the copy point toward the original subobject
+instead of creating a copy. By creating this clone method that points to the subobject, we ensure that we indeed
+create a copy of the subobject instead of pointing to the original subobject
+that's because in php instances are shared and if you point to an already existing instance whit a copy
+it creates an overlap in the subobjects
+
+this->tablier = clone $this->tablier
+this way we will indeed create a new copy of the subobject tablier
+this can go vache kiri because if we have a sub sub object then we need to create the clone method inside tablier for the subobject ect
+
+be careful because although it works in php 8, in previous versions you get an error
+why do we do it this way by recursion ? because it's the way to make sure we actually use the method below in the child
+
+### \_\_toString()
+
+the \_\_toString() method is used whenever we want to decide what we want to display when we want to get the info of an object
+we create this method and then we return a sprintf for instance
+sprintf we get the variables in text with a % and then the variables as a second parameter

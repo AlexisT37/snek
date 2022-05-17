@@ -1,57 +1,34 @@
 <?php
 
+declare(strict_types=1);
 
-class Encounter
-
+class Mesmer
 {
-    private const POWER = 10;
-    private const LOWER_DIVIDE = 400;
-    public const RESULT_WINNER = 1;
-    public const RESULT_LOSER = -1;
-    public const RESULT_DRAW = 0;
-    public const RESULT_POSSIBILITIES = [self::RESULT_WINNER, self::RESULT_LOSER, self::RESULT_DRAW];
-
-    public static function probabilityAgainst(Player $playerOne, Player $playerTwo): float
+    public function __construct(public string $specialization, public string $weapon)
     {
-        return 1 / (1 + (self::POWER ** (($playerTwo->level - $playerOne->level) / self::LOWER_DIVIDE)));
-    }
-
-    public static function setNewLevel(Player $playerOne, Player $playerTwo, int $playerOneResult): void
-    {
-        if (!in_array($playerOneResult, self::RESULT_POSSIBILITIES)) {
-            trigger_error(sprintf('Invalid result. Expected %s', implode(' or ', self::RESULT_POSSIBILITIES)));
-        }
-
-        $playerOne->level += round(32 * ($playerOneResult - self::probabilityAgainst($playerOne, $playerTwo)));
     }
 }
 
-class Player
+class Specialization
 {
-    public int $level;
+    public function __construct(public string $profession, protected Mesmer $mesmer)
+    {
+    }
+
+    public function __clone()
+    {
+        $this->mesmer = clone $this->mesmer;
+    }
+
+    public function __toString()
+    {
+        return sprintf('Cette specialisation vient de la profession %d, avec l\'arme %d', $this->mesmer->specialization, $this->mesmer->weapon);
+    }
 }
+$virtuoso = new Specialization("purple", new Mesmer("Virtuoso", "sword"));
+var_dump($virtuoso);
+$mirage = clone $virtuoso;
+var_dump($mirage);
+echo '<br>';
 
-$greg = new Player;
-$jade = new Player;
-
-$greg->level = 400;
-$jade->level = 800;
-$encounter = new Encounter;
-
-echo sprintf(
-    'Greg à %.2f%% chance de gagner face a Jade',
-    Encounter::probabilityAgainst($greg, $jade) * 100
-) . PHP_EOL;
-
-// Imaginons que greg l'emporte tout de même.
-Encounter::setNewLevel($greg, $jade, Encounter::RESULT_WINNER);
-Encounter::setNewLevel($jade, $greg, Encounter::RESULT_LOSER);
-
-echo sprintf(
-    'les niveaux des joueurs ont évolués vers %s pour Greg et %s pour Jade',
-    $greg->level,
-    $jade->level
-);
-
-
-exit(0);
+echo $virtuoso;
