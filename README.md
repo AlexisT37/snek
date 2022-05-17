@@ -40,7 +40,7 @@ the argument is what we use in the calling of the function
 
 now we managed to get what we want ^^
 the method to display the information of objects are as follow
-get_class_methods()
+get_class_methods() => you need to put the argument instance between ''
 get_object_vars()
 get_class_vars()
 get_class() <-- for the name of the instance
@@ -193,3 +193,27 @@ or you can target the parent method with the keyword parent::
 the problem is that if you have several layers of parents, you can't specify if you want to call a parent or let's say a grandparent
 what you do then is that you call a parent method and then make sure that this parent method calls itself for its parent, that way
 you go to the grandparent
+
+## protected
+
+protected means that you will only have access to the function as part of the inheritance process
+in short, a child class, or the class itself, are the only ones who can access the function
+
+## abstraction in oop
+
+an abstracted class is a class that is never going to be used on its own but is always going to be extended to a child
+for instance if we have the player class in guild wars 2, as soon as you log in, you are not going to be a player
+instead you're going to be one of the 9 professions, and then 1 out of 4 specs, core or elite
+
+you can abstract classes but also function
+if you want to do abstraction for a function you don't specify it's behaviour as code inside the brackets, you
+put nothing.
+However you put a ; at the end and you can also specify its return type
+if you write an abstnact class in a parent, then it must be declared and full functionalized in every children
+otherwise that means you are abstracting even further to grandchildren and beyond.
+
+## prevent inheritance
+
+you can use the keyword final in front of a class so that it cannot be inherited
+if i have 3 classes, for instance the class book then novel then eronovel
+if eronevel extends novel but i write abstract in front of novel then fatal error
