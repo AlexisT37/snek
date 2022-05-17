@@ -156,3 +156,14 @@ why do we do it this way by recursion ? because it's the way to make sure we act
 the \_\_toString() method is used whenever we want to decide what we want to display when we want to get the info of an object
 we create this method and then we return a sprintf for instance
 sprintf we get the variables in text with a % and then the variables as a second parameter
+
+tostring is kinda weird because i see the thing: we want to print this variable, this object
+and get the useful property nicely shown, but for some reason I get 0
+
+i'll try again later
+
+### invoke
+
+\_\_invoke is a function that looks interesing, let's visit it
+the invoke method allows us to get to the variable and call it like a method with parameters
+it will simply act as if it was a function
