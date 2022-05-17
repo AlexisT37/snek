@@ -217,3 +217,9 @@ otherwise that means you are abstracting even further to grandchildren and beyon
 you can use the keyword final in front of a class so that it cannot be inherited
 if i have 3 classes, for instance the class book then novel then eronovel
 if eronevel extends novel but i write abstract in front of novel then fatal error
+
+## control parent behaviour
+
+you can static instead of self for referenc. self is about the current class,
+while static is about also being able to select the child element instead
+this is late static binding, where the value resolution happens not when the code is analyse but at runtime
