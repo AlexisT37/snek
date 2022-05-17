@@ -167,3 +167,29 @@ i'll try again later
 \_\_invoke is a function that looks interesing, let's visit it
 the invoke method allows us to get to the variable and call it like a method with parameters
 it will simply act as if it was a function
+
+## inheritance
+
+you can't call by reference child properties from the parent
+it works in cascade
+instead of self::property you can call parent::property
+
+## overloading
+
+we can rewrite a child method based on the parent method
+what about overloading rules ?
+you cannot remove arguments
+you can add an argument ONLY if it is obtional, that way it doesn't break the parent usage
+you can change the type of argument only if the type is compatible with the original type
+you can change the return type ONLY if the new type is compatible with the original return type\
+
+you can either overload the parent method and add stuff or completely rewrite the method
+if you overload you call with parent::method
+
+if you have inheritance and target a parent property, you can
+call the method of the current class using $this or self:: for the static methods
+or you can target the parent method with the keyword parent::
+
+the problem is that if you have several layers of parents, you can't specify if you want to call a parent or let's say a grandparent
+what you do then is that you call a parent method and then make sure that this parent method calls itself for its parent, that way
+you go to the grandparent
