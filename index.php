@@ -2,40 +2,87 @@
 
 declare(strict_types=1);
 
-class User
-//class of User
+class Lobby
 {
-    public const STATUS_ACTIVE = 'active';
-    // constant of status
-    public const STATUS_INACTIVE = 'inactive';
-    //constant of status inactive
+    /** @var array<QueuingPlayer> */
+    public array $queuingPlayers = [];
 
-    public static $nbrOfInitalizedUsers = 0;
-    //static variable of number of users initialized
-
-    public function __construct(public string $username, public string $status = self::STATUS_ACTIVE)
-    //constructor of users that takesusername and status as parameters with status active
+    public function findOponents(QueuingPlayer $player): array
     {
+        $minLevel = round($player->getRatio() / 100);
+        $maxLevel = $minLevel + $player->getRange();
+
+        return array_filter($this->queuingPlayers, static function (QueuingPlayer $potentialOponent) use ($minLevel, $maxLevel, $player) {
+            $playerLevel = round($potentialOponent->getRatio() / 100);
+
+            return $player !== $potentialOponent && ($minLevel <= $playerLevel) && ($playerLevel <= $maxLevel);
+        });
+    }
+
+    public function addPlayer(Player $player): void
+    {
+        $this->queuingPlayers[] = new QueuingPlayer($player);
+    }
+
+    public function addPlayers(Player ...$players): void
+    {
+        foreach ($players as $player) {
+            $this->addPlayer($player);
+        }
     }
 }
 
-class Admin extends User
-//class that takes from the User class
+class Player
 {
-    public static $nbrofInitalizedAdmins = 0;
-    //initialize the number of initialized admins
-
-    public static function newInitalization()
-    //function that initializes the number of admins
+    public function __construct(protected string $name, protected float $ratio = 400.0)
     {
-        self::$nbrofInitalizedAdmins++;
-        //self increments the number of admins
-        parent::$nbrOfInitalizedUsers++;
-        //looks at the parent class and increments the number of users because it is a child class
+    }
+
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    private function probabilityAgainst(self $player): float
+    {
+        return 1 / (1 + (10 ** (($player->getRatio() - $this->getRatio()) / 400)));
+    }
+
+    public function updateRatioAgainst(self $player, int $result): void
+    {
+        $this->ratio += 32 * ($result - $this->probabilityAgainst($player));
+    }
+
+    public function getRatio(): float
+    {
+        return $this->ratio;
     }
 }
 
-Admin::newInitalization();
-//runst the function that initializes the number of admins
-var_dump(Admin::$nbrofInitalizedAdmins, Admin::$nbrOfInitalizedUsers, User::$nbrOfInitalizedUsers);
-//displays the number of admins, users, and admins
+class QueuingPlayer extends Player
+{
+    public function __construct(Player $player, protected int $range = 1)
+    {
+        parent::__construct($player->getName(), $player->getRatio());
+    }
+
+    public function getRange(): int
+    {
+        return $this->range;
+    }
+
+    public function upgradeRange(): void
+    {
+        $this->range = min($this->range + 1, 40);
+    }
+}
+
+$greg = new Player('greg', 400);
+$jade = new Player('jade', 476);
+
+$lobby = new Lobby();
+$lobby->addPlayers($greg, $jade);
+
+var_dump($lobby->findOponents($lobby->queuingPlayers[0]));
+
+exit(0);
