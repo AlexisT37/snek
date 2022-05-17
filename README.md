@@ -223,3 +223,22 @@ if eronevel extends novel but i write abstract in front of novel then fatal erro
 you can static instead of self for referenc. self is about the current class,
 while static is about also being able to select the child element instead
 this is late static binding, where the value resolution happens not when the code is analyse but at runtime
+
+# namespace
+
+namespace is used to divide our code even further
+that way you can actually write 2 different classes with the same name,
+as long as they have different namespaces there will be no overlap
+
+if you use samespace to encapsulate your classes, then you will have to create a
+namespace to encapsulate the code after that
+luckily you can get the full namespace of an object by using the getclass method
+then you will have the \\, or the FQCN which is the fully qualified class name
+
+a good thing is that if you don't want to bother with a namespace for your main code you can
+just put no name instead => namespace {}
+imports look like uris and you type the keyword use to import
+there is an autoimport for php maybe intellehant
+
+if you have a method that is in the global namespace, just prevent the waste of time of php of looking for it in every namespace
+by putting a backspace in front of its name
