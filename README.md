@@ -38,6 +38,8 @@ in the first function, all that is used as variables in the function are the 2 a
 THE PARAMETER and the argument are the same thing, except the parameter is what we talk about in the definition
 the argument is what we use in the calling of the function
 
+# classmethods
+
 now we managed to get what we want ^^
 the method to display the information of objects are as follow
 get_class_methods() => you need to put the argument instance between ''
@@ -84,6 +86,8 @@ to actually greenlight a function that will indeed interact with the class
 you use self::methodname() that will be a good hint to know that it is a static method
 we added a function that increments a static variable
 then we can display the content of that variable, which doesn't depend on any of the instances
+a static variable is allowed to be called using the name of the class only and not the name of the instance
+a static method will work with the class and not the object
 
 that's so sweet
 
@@ -211,6 +215,7 @@ put nothing.
 However you put a ; at the end and you can also specify its return type
 if you write an abstnact class in a parent, then it must be declared and full functionalized in every children
 otherwise that means you are abstracting even further to grandchildren and beyond.
+if a method is abstract then the class of that method is also abstract
 
 ## prevent inheritance
 
@@ -242,3 +247,84 @@ there is an autoimport for php maybe intellehant
 
 if you have a method that is in the global namespace, just prevent the waste of time of php of looking for it in every namespace
 by putting a backspace in front of its name
+require_once is done so you can import files
+
+# traits
+
+traits are like a superclass and it allows to overcome the problem of not being able to
+inherit from several classes at the same time
+a trait is like a class that cannot be instanciated
+a traitcan be shared freely by different classes
+a trait can be composed of other traits
+you can use several traits in one class
+
+# interface
+
+interfaces are declared like classes but can only contain method signatures
+the signature of a method is everytthing that gives info no the method
+the name, the parameters, return value, types,
+
+with an interface you only write a signature not any content
+an interface can work as a type in a parameter of a method
+
+just like classes, interfaces can inherit from other interfaces
+
+for instance, if we take 2 interfaces + 1 interface that ties the 2 first together
+each method below uses the interface tailored for its need
+don't use interfaces as conditions
+the keyword instance of allows to use the used classes and interfaces
+if you differenciate behaviour by checking classes with instanceof then it's not the rigth behaviour
+because it means that your code does too many things at the same time
+
+# ternary operator
+
+you can use ? and then : to make a useful shorthand operator
+
+# clever use of continue
+
+if you want to skip a specific kind of element in an array
+you can use continue whenever you validate that array
+
+# shorthand with ??
+
+you have one variable and you will do one action or the other
+echo a ?? b;
+echoes variable a else echoes variable b
+
+# spaceship operator
+
+<=>
+returs different value according to the comparison, -1, 0, 1
+works for alphabetical order too
+
+# operator === and conversion
+
+if you put (int) before a variable it tests for the int version of that variable
+(int) does convert the variable on assignment, it's not just "seeing what would happen if it were an int"
+
+# sorting your code, indentation, upper and lower case
+
+default visibility is public but it's good practice to say it
+for an if or else or elseif statement you should put the curly bracket on the line and not the line below
+elseif should be one word and not 2
+
+# code in php like a pro
+
+https://www.youtube.com/watch?v=tHcijydtSJw
+
+## kiss keep it simple, stupid
+
+don't try to do to many one liners and complex functions
+
+## less is more, less code is better
+
+less plugins, less code, less comments
+
+## use what you got... first
+
+# coding in php like a pro exameple
+
+don't use raw sql, use an orm
+apply the cmv design pattern
+
+# interview questions

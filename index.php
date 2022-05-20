@@ -1,15 +1,25 @@
 <?php
-class Product
+
+class Customer
 {
-
-
-    function __construct(private string $name, private string $description, private float $price)
+    protected static int $coin = 777;
+    public function __construct(protected  $id, protected $name, protected string $email, protected $balance)
     {
     }
 }
 
-$product1 = new Product("iPhone 12", "a nice phone but not my type", 1200.88);
+class Customer2 extends Customer
+{
+    public static function getCoin()
+    {
+        echo parent::$coin;
+    }
+}
 
-var_dump($product1);
 
+
+$customer = new Customer2(2, "teso", "al@gmail.com", 499);
+var_dump($customer);
 echo '<br>';
+
+Customer2::getCoin();
