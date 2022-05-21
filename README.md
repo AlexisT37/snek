@@ -327,4 +327,26 @@ less plugins, less code, less comments
 don't use raw sql, use an orm
 apply the cmv design pattern
 
-# interview questions
+# php interview questions
+
+# cs dojo 10 tips for problem solving
+
+## 1 find a brute force solution
+
+## 2 find a simpler version of the problem
+
+## 3
+
+## 4
+
+## 5
+
+## 6
+
+## 7
+
+## 8
+
+## 9
+
+## 10
