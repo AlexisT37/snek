@@ -329,24 +329,39 @@ apply the cmv design pattern
 
 # php interview questions
 
-# cs dojo 10 tips for problem solving
+# cs dojo 5 tips for problem solving
 
 ## 1 find a brute force solution
 
 ## 2 find a simpler version of the problem
 
-## 3
+## 3 think about the problem with simpler examples -> try noticing a pattern
 
-## 4
+for instance if array then small array, ect
+if you modelizen the array results in a square for the closest sum problem,
+then you realize that there is an established zone of closer results and you can eliminate everything that
+falls outside that zone (like lava techtonic plate)
+
+## 4 use some vizualisation
+
+example of visualization here is using a much bigger grid to get a clearer pattern for the zone
 
 ## 5
 
-## 6
+test your solution on a few examples
 
-## 7
+# tips for efficient developers
 
-## 8
+## no multitasking
 
-## 9
+## kno you ide
 
-## 10
+### functionalities
+
+### shortcuts
+
+## don't do menial work, try to automatize everything
+
+## DON'T DO THINGS THAT YOUR COMPUTER CAN DO FOR YOU
+
+## automate testing
